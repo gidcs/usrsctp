@@ -59,6 +59,8 @@ programs/client
 programs/daytime_server
 programs/discard_server
 programs/echo_server
+programs/speedtest_server
+programs/speedtest_client
 programs/ekr_client
 programs/ekr_loop
 programs/ekr_loop_offload

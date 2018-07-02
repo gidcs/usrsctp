@@ -69,6 +69,8 @@ find_package(Threads)
 #################################################
 
 set(check_programs
+	speedtest_client.c
+	speedtest_server.c
 	client.c
 	daytime_server.c
 	discard_server.c
