@@ -10,10 +10,23 @@ If you are only interested in a single branch, just append `?branch=BRANCHNAME` 
 
 ## how to use it
 
-```
-git clone https://github.com/gidcs/usrsctp
-cd usrsctp
-mkdir build
-cd build
-cmake3 ..
-```
+1. clone this projects
+    ```
+    git clone https://github.com/gidcs/usrsctp
+    cd usrsctp
+    ```
+
+2. use autotools or cmake3 to build this projects
+
+    ```
+    ./bootstrap
+    ./configure
+    make
+    ```
+
+    ```
+    mkdir build
+    cd build
+    cmake3 ..
+    make
+    ```
