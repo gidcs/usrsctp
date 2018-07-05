@@ -61,11 +61,12 @@
 #define INTERVAL 1
 #define __to_mbps(b) (b/(1024*1024))
 
-const int use_cb = 0;
+const int use_cb = 1;
 struct timeval begin, end;
 int cnt;
 int seconds = 0;
 double size;
+int done = 0;
 
 double timeval_diff(struct timeval x , struct timeval y){ //return ms
     x.tv_usec -= y.tv_usec;
@@ -165,6 +166,12 @@ receive_cb(struct socket *sock, union sctp_sockstore addr, void *data,
         }
         free(data);
     }
+    else{
+        //printf("no data!!!\n");
+        done = 1;
+        //printf("usrsctp_close!!!\n");
+        usrsctp_close(sock);
+    }
     return (1);
 }
 
@@ -262,7 +269,7 @@ main(int argc, char *argv[])
 
     signal(SIGALRM, print_bw);
     alarm(INTERVAL);
-    while (1) {
+    while (!done) {
         if (use_cb) {
 #ifdef _WIN32
         Sleep(SLEEP * 1000);
@@ -325,7 +332,6 @@ main(int argc, char *argv[])
             }
         }
     }
-    usrsctp_close(sock);
     while (usrsctp_finish() != 0) {
 #ifdef _WIN32
         Sleep(SLEEP * 1000);
@@ -333,5 +339,6 @@ main(int argc, char *argv[])
         sleep(SLEEP);
 #endif
     }
+    print_bw(0);
     return (0);
 }

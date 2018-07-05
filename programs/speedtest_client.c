@@ -150,7 +150,7 @@ handle_association_change_event(struct sctp_assoc_change *sac)
     if ((sac->sac_state == SCTP_CANT_STR_ASSOC) ||
         (sac->sac_state == SCTP_SHUTDOWN_COMP) ||
         (sac->sac_state == SCTP_COMM_LOST)) {
-        exit(0);
+        //exit(0);
     }
     return;
 }
@@ -294,7 +294,6 @@ receive_cb(struct socket *sock, union sctp_sockstore addr, void *data,
         usrsctp_close(sock);
     } 
     else {
-        /*
         if (flags & MSG_NOTIFICATION) {
             handle_notification((union sctp_notification *)data, datalen);
         } else {
@@ -306,7 +305,6 @@ receive_cb(struct socket *sock, union sctp_sockstore addr, void *data,
             }
 #endif
         }
-        */
         free(data);
     }
     return (1);
